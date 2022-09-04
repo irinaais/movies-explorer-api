@@ -1,0 +1,46 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Backend for service movies-explorer",
+  "main": "app.js",
+  "scripts": {
+    "lint": "npx eslint .",
+    "dev": "nodemon ./app.js",
+    "start": "node ./app.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irinaais/movies-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "Irina Osipova <irina_ais_90mail.ru> (https://vk.com/irinaais)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irinaais/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/irinaais/movies-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.3",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "celebrate": "^15.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-winston": "^4.2.0",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.6",
+    "validator": "^13.7.0",
+    "winston": "^3.8.1"
+  }
+}
