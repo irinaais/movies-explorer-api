@@ -34,6 +34,9 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+app.use('/users', require('./routes/users'));
+app.use('/movies', require('./routes/movies'));
+
 app.use((req, res, next) => {
   next(new NotFoundError('Указанная страница не найдена'));
 });
