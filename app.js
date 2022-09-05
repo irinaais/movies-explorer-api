@@ -5,21 +5,17 @@ const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const router = require('./routes/index');
 const { limiter } = require('./middlewares/limiter');
-const NotFoundError = require('./errors/NotFoundError');
-const { login, createUser } = require('./controllers/users');
-const auth = require('./middlewares/auth');
-const { registerValidator, authValidator } = require('./middlewares/validation');
 const handleError = require('./middlewares/handleError');
-
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const app = express();
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
-  console.log('Connected to bitfilmsdb');
+  await mongoose.connect('mongodb://localhost:27017/moviesdb');
+  console.log('Connected to moviesdb');
 
   await app.listen(PORT);
   console.log(`Server listen on ${PORT}`);
@@ -42,22 +38,10 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signup', registerValidator, createUser);
-app.post('/signin', authValidator, login);
-
-app.use(auth);
-
-app.use('/users', require('./routes/users'));
-app.use('/movies', require('./routes/movies'));
-
-app.use((req, res, next) => {
-  next(new NotFoundError('Указанная страница не найдена'));
-});
+app.use(router);
 
 app.use(errorLogger);
-
 app.use(errors());
-
 app.use((err, req, res, next) => {
   console.error(err);
   handleError(err, res, next);
