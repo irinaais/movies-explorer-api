@@ -11,6 +11,8 @@ const auth = require('./middlewares/auth');
 const { registerValidator, authValidator } = require('./middlewares/validation');
 const handleError = require('./middlewares/handleError');
 
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const { PORT = 3000 } = process.env;
 const app = express();
 
@@ -28,6 +30,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(requestLogger);
 
 // удалить после успешного прохождения ревью
 app.get('/crash-test', () => {
@@ -47,6 +51,8 @@ app.use('/movies', require('./routes/movies'));
 app.use((req, res, next) => {
   next(new NotFoundError('Указанная страница не найдена'));
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 
