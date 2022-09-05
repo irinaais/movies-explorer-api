@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const NotFoundError = require('./errors/NotFoundError');
-
+const { login, createUser } = require('./controllers/users');
+const auth = require('./middlewares/auth');
+const { registerValidator, authValidator } = require('./middlewares/validation');
 const handleError = require('./middlewares/handleError');
 
 const { PORT = 3000 } = process.env;
@@ -33,6 +35,11 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+app.post('/signup', registerValidator, createUser);
+app.post('/signin', authValidator, login);
+
+app.use(auth);
 
 app.use('/users', require('./routes/users'));
 app.use('/movies', require('./routes/movies'));
