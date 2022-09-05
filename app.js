@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const NotFoundError = require('./errors/NotFoundError');
 const { login, createUser } = require('./controllers/users');
@@ -27,9 +27,9 @@ async function main() {
 main();
 
 app.use(cors());
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use(requestLogger);
 
