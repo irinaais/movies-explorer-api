@@ -52,7 +52,7 @@ module.exports.getMe = (req, res, next) => {
       if (!user) {
         return next(new NotFoundError('Указанный пользователь не найден'));
       }
-      return res.send({ data: user });
+      return res.send({ email: user.email, name: user.name });
     })
     .catch(next);
 };
@@ -64,7 +64,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         return next(new NotFoundError('Указанный пользователь не найден'));
       }
-      return res.send({ data: user });
+      return res.send({ email: user.email, name: user.name });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
