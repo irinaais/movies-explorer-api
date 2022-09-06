@@ -19,6 +19,3 @@ module.exports.FORBIDDEN_ERROR_MESSAGE = 'Можно удалить только
 module.exports.CONFLICT_ERROR_MESSAGE = 'Пользователь с такой почтой уже зарегистрирован';
 module.exports.AUTH_SUCCESSFUL = 'Авторизация прошла успешно';
 module.exports.AUTH_ERROR_MESSAGE = 'Необходима авторизация';
-
-// todo вынести в отдельный файл
-module.exports.JWT_SECRET = 'dev-secret';
