@@ -9,12 +9,13 @@ const router = require('./routes/index');
 const { limiter } = require('./middlewares/limiter');
 const handleError = require('./middlewares/handleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { MONGO_URL_DEV } = require('./utils/config');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, MONGO_URL = MONGO_URL_DEV } = process.env;
 const app = express();
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/moviesdb');
+  await mongoose.connect(MONGO_URL);
   console.log('Connected to moviesdb');
 
   await app.listen(PORT);
