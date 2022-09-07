@@ -11,7 +11,7 @@ const handleError = require('./middlewares/handleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { MONGO_URL_DEV } = require('./utils/config');
 
-const { PORT = 3000, MONGO_URL = MONGO_URL_DEV } = process.env;
+const { PORT = 3001, MONGO_URL = MONGO_URL_DEV } = process.env;
 const app = express();
 
 async function main() {
