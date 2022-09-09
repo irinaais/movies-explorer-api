@@ -5,11 +5,9 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
 const ValidationError = require('../errors/ValidationError');
-const AuthError = require('../errors/AuthError');
 const {
   CONFLICT_ERROR_MESSAGE,
   VALIDATION_ERROR_MESSAGE,
-  BAD_EMAIL_OR_PASSWORD,
   AUTH_SUCCESSFUL,
   USER_NOT_FOUND,
 } = require('../utils/constants');
@@ -40,9 +38,6 @@ module.exports.login = async (req, res, next) => {
     const token = jwt.sign({ _id: user._id }, getJwtToken(), { expiresIn: '7d' });
     res.send({ message: AUTH_SUCCESSFUL, token });
   } catch (err) {
-    if (err.message === 'IncorrectEmail') {
-      next(new AuthError(BAD_EMAIL_OR_PASSWORD));
-    }
     next(err);
   }
 };
@@ -74,6 +69,8 @@ module.exports.updateUser = async (req, res, next) => {
   } catch (err) {
     if (err.name === 'ValidationError') {
       next(new ValidationError(VALIDATION_ERROR_MESSAGE));
+    } else if (err.code === 11000) {
+      next(new ConflictError(CONFLICT_ERROR_MESSAGE));
     } else {
       next(err);
     }
