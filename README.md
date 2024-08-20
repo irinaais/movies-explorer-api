@@ -54,6 +54,6 @@
 `npm run start` — запускает сервер
 `npm run dev` — запускает сервер с hot-reload
 
-Ссылка на backend - api.movies.irinaosipova.nomoredomains.sbs
+Ссылка на backend - api.movies-explorer-irina.ru
 
-Публичный IP-адрес сервера - 37.220.83.8
+Публичный IP-адрес сервера - 147.45.245.245
